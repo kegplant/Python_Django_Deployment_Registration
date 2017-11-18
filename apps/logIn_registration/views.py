@@ -3,9 +3,9 @@ from datetime import datetime
 from models import Users
 import bcrypt
 from django.contrib.messages import error
-
+   
 # the index function is called when root is visited
-def loggedIn(request):
+def isLoggedIn(request):
     try:
         request.session['user_id']
         return True
@@ -13,7 +13,7 @@ def loggedIn(request):
         return False
 def index(request):
     context={
-        'status':loggedIn(request)
+        'status':isLoggedIn(request)
     }
     #return HttpResponse(response)
     return render(request,'logIn_registration/index.html',context)
@@ -56,7 +56,7 @@ def process(request):
     return redirect('/')
 
 def success(request,id):
-    if not loggedIn(request):
+    if not isLoggedIn(request):
         return redirect('/')
     user=Users.objects.get(id=id)
     context={
