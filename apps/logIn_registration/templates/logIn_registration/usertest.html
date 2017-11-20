@@ -1,0 +1,12 @@
+{% extends 'logIn_registration/layout.html' %} {% block content %}
+<header>
+    <a href='/friends'>Home</a>
+    <a href='/logOut'>Logout</a>
+</header>
+<div>
+    <h4>{{user.last_name}}'s Profile </h4>
+    <p>Name: {{user.first_name}}</p>
+    <p>Email: {{user.email}}</p>
+    
+</div>
+{% endblock %}
