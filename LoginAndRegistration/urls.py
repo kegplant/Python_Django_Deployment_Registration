@@ -19,3 +19,4 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('apps.logIn_registration.urls')),
 ]
+  

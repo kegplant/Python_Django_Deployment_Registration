@@ -1,7 +1,7 @@
 </html>
 <!doctype html>
 <html lang="en">
-
+  
 <head>
     <title>Title</title>
     <!-- Required meta tags -->
@@ -22,65 +22,67 @@
 
 <body>
     <div class="container">
-
-
-        <p>logged in: {{status}}</p>
         <p>user ID: {{request.session.user_id}}</p>
-
+        <a href='/friends'>Home</a>        
         <button>
             <a href='/logOut'>Log Out</a>
         </button>
         <form action='/process' method='post'>
             {%csrf_token%}
+<h2>Welcome!</h2>
+            <h3>Register</h3>
 
-            <h3>Registration</h3>
+            <label>
+                Name:
+                <input type='text' name='first_name' value='S'>
+            </label>
+            <label>
+                Alias:
+                <input type='text' name='last_name' value='W'>
+            </label>
             <label>
                 email
-                <input type='text' name='email' >
-            </label>
-            <label>
-                First Name:
-                <input type='text' name='first_name' >
-            </label>
-            <label>
-                Last Name:
-                <input type='text' name='last_name' >
+                <input type='text' name='email' value='abc@cde.com'>
             </label>
             <label>
                 Password:
-                <input type='password' name='password'>
+                <input type='password' name='password' value='abcDEF23ff'>
             </label>
+            <p>*Password should be at least 8 characters</p>
             <label>
                 Confirm Password:
-                <input type='password' name='password2' >
+                <input type='password' name='password2' value='abcDEF23ff'>
+            </label>
+            <label>
+                Date of Birth:
+                <input type='date' name='birth_day' value='1900-01-01'>
             </label>
             <!-- <label>
             Birthday:
             <input type='date' name='bday'>
         </label> -->
             <input type='hidden' name='type' value='register'>
-            <button>submit</button>
+            <button>register</button>
         </form>
         <form action='/process' method='post'>
             {%csrf_token%}
-            <h3>Log In: {{status}}</h3>
+            <h3>Login</h3>
             <label>
                 email
-                <input type='text' name='email' >
+                <input type='text' name='email' value='abc@cde.com'>
             </label>
             <label>
                 Password:
-                <input type='password' name='password' >
+                <input type='password' name='password' value='abcDEF23ff'>
             </label>
             <input type='hidden' name='type' value='log in'>
             <button>log in</button>
         </form>
         <p>
-            Errors: {% if messages %} {% for message in messages %}
+            {% if messages %} {% for message in messages %}
             <p>{{message}}</p>
             {% endfor %} {% endif %}
         </p>
-        <a href='/clear'>Clear Database</a>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,0 +1,65 @@
+{% extends 'logIn_registration/layout.html' %} {% block content %}
+<header>
+    Hello, {{user.last_name}}!
+    <a href='/logOut'>Logout</a>
+</header>
+<div>
+    {%if user.friends.all%}
+    <p>Here is the list of your friends: </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                {%for friend in user.friends.all%}
+                <tr>
+                    <td scope="row">
+                        {{friend.last_name}}
+                    </td>
+                    <td>
+                            <a href='/user/{{friend.id}}'>View Profile</a>
+                        <form action='/friends/remove' method='post'>
+                            {%csrf_token%}
+                            <input type='hidden' name='friend_id' value={{friend.id}}>                            
+                            <button>Remove as Friend</button>
+                        </form>
+                    </td>
+                </tr>
+                {%endfor%}
+        </tbody>
+    </table>
+    {%else%}
+    <p>You do not have friends yet</p>
+    {%endif%} {%if users%}
+    Other Users not on your friend's list:
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for not_friend in users%}
+            <tr>
+                <td scope="row">
+                    <a href='/user/{{not_friend.id}}'>{{not_friend.last_name}}</a>
+                </td>
+                <td>
+                    <form action='/friends/add' method='post'>
+                        {%csrf_token%}
+                        <input type='hidden' name='friend_id' value={{not_friend.id}}>
+                        <button>Add as Friend</button>
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+    {%endif%}
+
+</div>
+{% endblock %}
